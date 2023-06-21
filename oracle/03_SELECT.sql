@@ -1,4 +1,4 @@
-/*
+    /*
     - 데이터(data) : 필요에 의해 수집했지만 아직 특정 목적을 위해 정제하지 않은 값
      vs 정보(info) : 수집한 데이터를 어떠한 목적을 위해 분석하거나 가공하여 새로운 의미 부여 
      
@@ -360,5 +360,7 @@ WHERE (SALARY + SALARY*BONUS)*12 IS NOT NULL AND EMP_NAME LIKE '%하%';
 -- 전 사원의 사원명, 보너스 조회 (보너스 기준 오름차순 정렬)
 SELECT EMP_NAME, BONUS
 FROM EMPLOYEE
+WHERE BONUS IS NOT NULL
 --ORDER BY BONUS; -- 보너스 기준 오름차순 정렬
-ORDET BY BONUS DESC;
+ORDER BY BONUS DESC NULLS LAST; -- 보너스 기준 내림차순 정렬 (null이 맨뒤)
+
