@@ -72,3 +72,12 @@ SELECT *
 FROM TB_CLASS C
 JOIN TB_DEPARTMENT D ON (C.DEPARTMENT_NO = C.DEPARTMENT_NO)
 WHERE CATEGORY = '예체능';
+--13. 춘 기술대학교 서반아어학과 학생들의 지도교수를 게시하고자 한다. 학생이름과 지도교수 이
+--름을 찾고 만일 지도 교수가 없는 학생일 경우 “지도교수 미지정”으로 표시하도록 하는 SQL 문을
+--작성하시오. 단, 출력헤더는 “학생이름”, “지도교수” 로 표시하며 고학번 학생이 먼저 표시되도록
+--한다.
+SELECT STUDENT_NAME, PROFESSOR_NAME
+FROM TB_STUDENT S
+JOIN TB_PROFESSOR P USING(DEPARTMENT_NO)
+JOIN TB_DEPARTMENT D USING(DEPARTMENT_NO)
+WHERE DEPARTMENT_NAME = '서반아어학과';
