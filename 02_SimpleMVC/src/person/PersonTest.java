@@ -97,10 +97,6 @@ public class PersonTest {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-	
-		
 }
 	
 }
