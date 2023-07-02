@@ -45,10 +45,12 @@ JOIN TB_PROFESSOR P ON (C.DEPARTMENT_NO = P.DEPARTMENT_NO)
 ORDER BY PROFESSOR_NAME;
 --9. ‘음악학과’ 학생들의 평점을 구하려고 한다. 음악학과 학생들의 “학번”, “학생 이름”, “전체 평점”
 --을 출력하는 SQL 문장을 작성하시오. 단, 평점은 소수점 1자리까지만 반올림하여 표시한다
-SELECT STUDENT_NO, STUDENT_NAME, POINT
+SELECT STUDENT_NO, STUDENT_NAME, ROUND(AVG(NVL(POINT,0)),1)
 FROM TB_STUDENT S
-JOIN TB_GRADE G ON (S.STUDENT_NO = G.STUDENT_NO)
-WHERE DEPARTMENT_NO = '059';
+JOIN TB_GRADE USING (STUDENT_NO)
+JOIN TB_DEPARTMENT USING (DEPARTMENT_NO)
+WHERE DEPARTMENT_NAME = '음악학과'
+GROUP BY STUDENT_NO, STUDENT_NAME;
 --10. 학번이 A313047인 학생이 학교에 나오고 있지 않다. 지도 교수에게 내용을 전달하기 위한 학
 --과 이름, 학생 이름과 지도 교수 이름이 필요하다. 이때 사용할 SQL 문을 작성하시오. 단, 출력헤
 --더는 “학과이름”, “학생이름”, “지도교수이름”으로 출력되도록 한다.
@@ -68,10 +70,12 @@ AND C.CLASS_NO = G.CLASS_NO
 AND TERM_NO LIKE '2007%';
 --12. 예체능 계열 과목 중 과목 담당교수를 한 명도 배정받지 못한 과목을 찾아 그 과목 이름과
 --학과 이름을 출력하는 SQL 문장을 작성하시오.
-SELECT *
+SELECT CLASS_NAME, DEPARTMENT_NAME
 FROM TB_CLASS C
 JOIN TB_DEPARTMENT D ON (C.DEPARTMENT_NO = C.DEPARTMENT_NO)
-WHERE CATEGORY = '예체능';
+JOIN TB_CLASS_PROFESSOR CP USING (CLASS_NO)
+WHERE CATEGORY = '예체능'
+AND PROFESSOR_NO IS NULL;
 --13. 춘 기술대학교 서반아어학과 학생들의 지도교수를 게시하고자 한다. 학생이름과 지도교수 이
 --름을 찾고 만일 지도 교수가 없는 학생일 경우 “지도교수 미지정”으로 표시하도록 하는 SQL 문을
 --작성하시오. 단, 출력헤더는 “학생이름”, “지도교수” 로 표시하며 고학번 학생이 먼저 표시되도록
