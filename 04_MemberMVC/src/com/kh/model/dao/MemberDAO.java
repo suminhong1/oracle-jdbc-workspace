@@ -3,6 +3,7 @@ package com.kh.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,13 +15,14 @@ import config.ServerInfo;
 
 /*
  * dao란?
- * Database Access object의 약자로 디비에 접근하는 로직
+ * Database Access Object의 약자로 디비에 접근하는 로직
  * (일명 비즈니스 로직)을 담고 있는 객체
- */
+ * */
 
 public class MemberDAO implements MemberDAOTemplate {
-	
+
 	private Properties p = new Properties();
+	
 	public MemberDAO() {
 		try {
 			p.load(new FileInputStream("src/config/jdbc.properties"));
@@ -31,40 +33,78 @@ public class MemberDAO implements MemberDAOTemplate {
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
+
 	public Connection getConnect() throws SQLException {
-		return null;
+		return DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASSWORD);
 	}
-
-	@Override
+	
 	public void closeAll(PreparedStatement st, Connection conn) throws SQLException {
+		st.close();
+		conn.close();
 	}
-
-	@Override
-	public void closeAll(ResultSet rs, PreparedStatement st, Connection conn) {
+	
+	public void closeAll(ResultSet rs, PreparedStatement st, Connection conn) throws SQLException {
+		rs.close();
+		closeAll(st, conn);
 	}
-
-	@Override
+	
 	public void registerMember(Member vo) throws SQLException {
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("registerMember"));
+		st.setString(1, vo.getId());
+		st.setString(2, vo.getPassword());
+		st.setString(3, vo.getName());
+		st.executeUpdate();
+		closeAll(st, conn);
 	}
-
-	@Override
-	public void updatePassword(Member vo) throws SQLException {
+	
+	public void updatePassword(Member vo) throws SQLException { 
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("updatePassword"));
+		st.setString(1, vo.getPassword());
+		st.setString(2, vo.getId());
+		st.executeUpdate();
+		closeAll(st, conn);
 	}
-
-	@Override
+	
 	public void updateName(Member vo) throws SQLException {
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("updateName"));
+		st.setString(1, vo.getName());
+		st.setString(2, vo.getId());
+		st.executeUpdate();
+		closeAll(st, conn);
 	}
-
-	@Override
+	
 	public Member getMember(String id) throws SQLException {
-		return null;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("getMember"));
+		st.setString(1, id);
+		ResultSet rs = st.executeQuery();
+		Member m = null;
+		if(rs.next()) {
+			m = new Member(id, 
+					 rs.getString("password"), 
+					 rs.getString("name"));
+		}
+		closeAll(rs, st, conn);
+		return m;
 	}
-
-	@Override
+	
 	public Member login(Member vo) throws SQLException {
-		return null;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("login"));
+		st.setString(1, vo.getId());
+		st.setString(2, vo.getPassword());
+		ResultSet rs = st.executeQuery();
+		Member m = null;
+		if(rs.next()) {
+			m = new Member(rs.getString("id"), 
+					 rs.getString("password"), 
+					 rs.getString("name"));
+		}
+		closeAll(rs, st, conn);
+		return m;
 	}
 
 }
