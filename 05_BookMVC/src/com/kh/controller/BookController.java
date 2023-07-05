@@ -52,6 +52,10 @@ public class BookController {
 	}
 
 	public Member login(String id, String password) {
+		
+		
+		member.setMemberId(id);
+		member.setMemberPwd(password);
 		return member;
 	}
 

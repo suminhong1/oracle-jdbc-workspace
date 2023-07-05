@@ -83,19 +83,38 @@ public class BookDAO implements BookDAOTemplate{
 		Connection conn = getConnect();
 		PreparedStatement st = conn.prepareStatement(p.getProperty("sellBook"));
 		st.setInt(1, no);
+		
 		return no;
 	}
 
 	@Override
 	public int registerMember(Member member) throws SQLException {
 		// id, name, password
-		return 0;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("registerMember"));
+		st.setString(1, member.getMemberId());
+		st.setString(2, member.getMemberPwd());
+		st.setString(3, member.getMemberName());
+		return st.executeUpdate();
+		
 	}
 
 	@Override
 	public Member login(String id, String password) throws SQLException {
 		// char rs.getString("status").charAt(0)
-		return null;
+		Connection conn = getConnect();
+		PreparedStatement st = conn.prepareStatement(p.getProperty("Member login"));
+		st.setString(1,id);
+		st.setString(2,password);
+		ResultSet rs = st.executeQuery();
+		Member m = null;
+		if(rs.next()) {
+			m = new Member(rs.getString("id"), 
+					 rs.getString("password"), 
+					 rs.getString("name"));
+		}
+		closeAll(rs, st, conn);
+		return m;
 	}
 
 	@Override
