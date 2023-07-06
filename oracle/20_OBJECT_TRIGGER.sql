@@ -125,15 +125,15 @@ FOR EACH ROW
     -- 입고된 경우! --> 조건문
     IF(:NEW.STATUS = '입고')
     THEN UPDATE TB_PRODUCT
-    SET STOCK = STOCK + :NEW.AMOUNT
-    WHERE PCODE = :NEW.PCODE;
+        SET STOCK = STOCK + :NEW.AMOUNT
+        WHERE PCODE = :NEW.PCODE;
     END IF;
-    
+        
     -- 출고된 경우!
     IF(:NEW.STATUS = '출고')
     THEN UPDATE TB_PRODUCT
-    SET STOCK = STOCK - :NEW.AMOUNT
-    WHERE PCODE = :NEW.PCODE;
+        SET STOCK = STOCK - :NEW.AMOUNT
+        WHERE PCODE = :NEW.PCODE;
     END IF;
 END;
 /
