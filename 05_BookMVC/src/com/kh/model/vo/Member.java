@@ -3,12 +3,25 @@ package com.kh.model.vo;
 import java.util.Date;
 
 public class Member {
-
+	
 	private int memberNo;
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
 	private char status;
+	private Date enrollDate;
+	
+	public Member() {}
+	
+	public Member(String id, String password, String name) {
+		this.memberId = id;
+		this.memberPwd = password;
+		this.memberName = name;
+	}
+
+	public Member(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	public int getMemberNo() {
 		return memberNo;
@@ -58,26 +71,10 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
-	private Date enrollDate;
-
-	public Member(String id, String password, String name) {
-		super();
-		this.memberId = memberId;
-		this.memberPwd = memberPwd;
-		this.memberName = memberName;
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
+				+ memberName + ", status=" + status + ", enrollDate=" + enrollDate + "]";
 	}
-
-	public Member(int memberNo, String memberId, String memberPwd, String memberName, char status, Date enrollDate) {
-		super();
-		this.memberNo = memberNo;
-		this.memberId = memberId;
-		this.memberPwd = memberPwd;
-		this.memberName = memberName;
-		this.status = status;
-		this.enrollDate = enrollDate;
-	}
-
-	public Member() {
-	}
-
+	
 }

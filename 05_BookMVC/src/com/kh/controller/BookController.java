@@ -14,21 +14,17 @@ public class BookController {
 	private Member member = new Member(); // 로그인 정보 여기에 담아
 	
 	public ArrayList<Book> printBookAll() {
-		ArrayList<Book> bk = null;
 		try {
-			bk = dao.printBookAll();
+			return  dao.printBookAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		 return bk;
+		 return null;
 	}
 
 	public boolean registerBook(Book book) {
 		try {
-			ArrayList<Book> booklist = dao.printBookAll();
-			dao.registerBook(book);
-			return true;
-			
+			if(dao.registerBook(book)==1) return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -37,13 +33,17 @@ public class BookController {
 
 	public boolean sellBook(int no) {
 		// 책 삭제 DELETE문!
-		
+		try {
+			if(dao.sellBook(no)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public boolean registerMember(Member member) {
 				try {
-					dao.registerMember(member);
+					if(dao.registerMember(member)==1)
 					return true;
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -53,25 +53,49 @@ public class BookController {
 
 	public Member login(String id, String password) {
 		
-		
-		member.setMemberId(id);
-		member.setMemberPwd(password);
+		try {
+			member = dao.login(id, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return member;
 	}
 
 	public boolean deleteMember() {
+		try {
+			if(dao.deleteMember(member.getMemberId(), member.getMemberPwd())==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public boolean rentBook(int no) {
+		try {
+			if(dao.rentBook(new Rent(new Member(member.getMemberNo()), new Book(no)))==1);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
 		return false;
 	}
 	
 	public boolean deleteRent(int no) {
+		try {
+			if(dao.deleteRent(no)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
 	public ArrayList<Rent> printRentBook(){
+		try {
+			return dao.printRentBook(member.getMemberId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
