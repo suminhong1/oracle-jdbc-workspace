@@ -3,47 +3,48 @@ package com.youtube.model.vo;
 import java.util.Date;
 
 public class VideoComment {
-
-	private int CommentCode;
-	private String CommentDesc;
-	private Date CommentDate;
-	private int CommentParent;
+	private int commentCode;
+	private String commentDesc;
+	private Date commentDate;
+	private int commentParent;
 	
 	private Video video;
 	private Member member;
+	
 	public VideoComment() {}
 	public VideoComment(int commentCode, String commentDesc, Date commentDate, int commentParent, Video video,
 			Member member) {
-		CommentCode = commentCode;
-		CommentDesc = commentDesc;
-		CommentDate = commentDate;
-		CommentParent = commentParent;
+		this.commentCode = commentCode;
+		this.commentDesc = commentDesc;
+		this.commentDate = commentDate;
+		this.commentParent = commentParent;
 		this.video = video;
 		this.member = member;
 	}
+	
 	public int getCommentCode() {
-		return CommentCode;
+		return commentCode;
 	}
 	public void setCommentCode(int commentCode) {
-		CommentCode = commentCode;
+		this.commentCode = commentCode;
 	}
 	public String getCommentDesc() {
-		return CommentDesc;
+		return commentDesc;
 	}
 	public void setCommentDesc(String commentDesc) {
-		CommentDesc = commentDesc;
+		this.commentDesc = commentDesc;
 	}
 	public Date getCommentDate() {
-		return CommentDate;
+		return commentDate;
 	}
 	public void setCommentDate(Date commentDate) {
-		CommentDate = commentDate;
+		this.commentDate = commentDate;
 	}
 	public int getCommentParent() {
-		return CommentParent;
+		return commentParent;
 	}
 	public void setCommentParent(int commentParent) {
-		CommentParent = commentParent;
+		this.commentParent = commentParent;
 	}
 	public Video getVideo() {
 		return video;
@@ -57,10 +58,10 @@ public class VideoComment {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	
 	@Override
 	public String toString() {
-		return "VideoComment [CommentCode=" + CommentCode + ", CommentDesc=" + CommentDesc + ", CommentDate="
-				+ CommentDate + ", CommentParent=" + CommentParent + ", video=" + video + ", member=" + member + "]";
+		return "VideoComment [commentCode=" + commentCode + ", commentDesc=" + commentDesc + ", commentDate="
+				+ commentDate + ", commentParent=" + commentParent + ", video=" + video + ", member=" + member + "]";
 	}
-	
 }

@@ -9,6 +9,7 @@ public class Subscribe {
 	
 	private Member member;
 	private Channel channel;
+	
 	public Subscribe() {}
 	public Subscribe(int subsCode, Date subsDate, Member member, Channel channel) {
 		this.subsCode = subsCode;
@@ -16,6 +17,7 @@ public class Subscribe {
 		this.member = member;
 		this.channel = channel;
 	}
+	
 	public int getSubsCode() {
 		return subsCode;
 	}
@@ -40,10 +42,10 @@ public class Subscribe {
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
+	
 	@Override
 	public String toString() {
 		return "Subscribe [subsCode=" + subsCode + ", subsDate=" + subsDate + ", member=" + member + ", channel="
 				+ channel + "]";
 	}
-	
 }

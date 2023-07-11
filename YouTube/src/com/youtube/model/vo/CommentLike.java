@@ -6,16 +6,16 @@ public class CommentLike {
 
 	private int commLikeCode;
 	private Date commLikeDate;
-	private int commentCode;
 	
+	private VideoComment comment;
 	private Member member;
-
+	
 	public CommentLike() {}
 
-	public CommentLike(int commLikeCode, Date commLikeDate, int commentCode, Member member) {
+	public CommentLike(int commLikeCode, Date commLikeDate, VideoComment comment, Member member) {
 		this.commLikeCode = commLikeCode;
 		this.commLikeDate = commLikeDate;
-		this.commentCode = commentCode;
+		this.comment = comment;
 		this.member = member;
 	}
 
@@ -35,12 +35,12 @@ public class CommentLike {
 		this.commLikeDate = commLikeDate;
 	}
 
-	public int getCommentCode() {
-		return commentCode;
+	public VideoComment getComment() {
+		return comment;
 	}
 
-	public void setCommentCode(int commentCode) {
-		this.commentCode = commentCode;
+	public void setComment(VideoComment comment) {
+		this.comment = comment;
 	}
 
 	public Member getMember() {
@@ -53,8 +53,8 @@ public class CommentLike {
 
 	@Override
 	public String toString() {
-		return "CommentLike [commLikeCode=" + commLikeCode + ", commLikeDate=" + commLikeDate + ", commentCode="
-				+ commentCode + ", member=" + member + "]";
+		return "CommentLike [commLikeCode=" + commLikeCode + ", commLikeDate=" + commLikeDate + ", comment=" + comment
+				+ ", member=" + member + "]";
 	}
-	
+
 }

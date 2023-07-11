@@ -1,11 +1,12 @@
 package com.youtube.model.vo;
 
-public class Video {
+import java.util.Date;
 
+public class Video {
 	private int videoCode;
 	private String videoTitle;
 	private String videoDesc;
-	private String videoDate;
+	private Date videoDate;
 	private int videoViews;
 	private String videoUrl;
 	private String videoPhoto;
@@ -13,8 +14,9 @@ public class Video {
 	private Category category;
 	private Channel channel;
 	private Member member;
+	
 	public Video() {}
-	public Video(int videoCode, String videoTitle, String videoDesc, String videoDate, int videoViews, String videoUrl,
+	public Video(int videoCode, String videoTitle, String videoDesc, Date videoDate, int videoViews, String videoUrl,
 			String videoPhoto, Category category, Channel channel, Member member) {
 		this.videoCode = videoCode;
 		this.videoTitle = videoTitle;
@@ -27,6 +29,7 @@ public class Video {
 		this.channel = channel;
 		this.member = member;
 	}
+	
 	public int getVideoCode() {
 		return videoCode;
 	}
@@ -45,10 +48,10 @@ public class Video {
 	public void setVideoDesc(String videoDesc) {
 		this.videoDesc = videoDesc;
 	}
-	public String getVideoDate() {
+	public Date getVideoDate() {
 		return videoDate;
 	}
-	public void setVideoDate(String videoDate) {
+	public void setVideoDate(Date videoDate) {
 		this.videoDate = videoDate;
 	}
 	public int getVideoViews() {
@@ -87,6 +90,7 @@ public class Video {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	
 	@Override
 	public String toString() {
 		return "Video [videoCode=" + videoCode + ", videoTitle=" + videoTitle + ", videoDesc=" + videoDesc

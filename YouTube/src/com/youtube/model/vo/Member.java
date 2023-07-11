@@ -1,7 +1,6 @@
 package com.youtube.model.vo;
 
 public class Member {
-
 	private String memberId;
 	private String memberPassword;
 	private String memberNickname;
@@ -9,6 +8,7 @@ public class Member {
 	private String memberPhone;
 	private char memberGender;
 	private String memberAuthority;
+	
 	public Member() {}
 	public Member(String memberId, String memberPassword, String memberNickname, String memberEmail, String memberPhone,
 			char memberGender, String memberAuthority) {
@@ -20,6 +20,7 @@ public class Member {
 		this.memberGender = memberGender;
 		this.memberAuthority = memberAuthority;
 	}
+	
 	public String getMemberId() {
 		return memberId;
 	}
@@ -68,5 +69,4 @@ public class Member {
 				+ memberNickname + ", memberEmail=" + memberEmail + ", memberPhone=" + memberPhone + ", memberGender="
 				+ memberGender + ", memberAuthority=" + memberAuthority + "]";
 	}
-	
 }
