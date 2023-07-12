@@ -29,7 +29,7 @@ CREATE TABLE COMMENT_LIKE(----------------------------------------------------- 
 
     COMMENT_LIKE_DATE DATE DEFAULT SYSDATE NOT NULL, -- 댓글좋아요 누른시간
     COMMENT_LIKE_SEQ NUMBER,                        -- 댓글좋아요 SEQ
-    COMMENT_SEEQ NUMBER,                             -- 댓글 SEQ
+    COMMENT_SEQ NUMBER,                             -- 댓글 SEQ
     USER_ID VARCHAR2(200)                            -- 아이디
 );
 
